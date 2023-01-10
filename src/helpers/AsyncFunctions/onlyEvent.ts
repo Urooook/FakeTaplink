@@ -1,5 +1,5 @@
 export default function onlyEvent<K extends keyof HTMLElementEventMap>(
-    eventName: K,
+	eventName: K,
 ): (event: HTMLElementEventMap[K]) => boolean {
-    return (event) => event.type === eventName;
+	return (event) => event.type === eventName
 }
