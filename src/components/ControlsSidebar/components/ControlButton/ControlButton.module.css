@@ -1,0 +1,46 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+
+    margin-right: 10px;
+    margin-bottom: 10px;
+
+    cursor: pointer;
+
+    border: 1px solid var(--ft-color-grey);
+    border-radius: var(--ft-border-radius);
+    transition: background-color 0.2s, color 0.2s, border 0.2s;
+}
+
+.container:hover {
+    border-color: var(--ft-color-blue);
+}
+
+.container:nth-child(3n) {
+    margin-right: 0px;
+}
+
+.active {
+    background-color: var(--ft-color-blue);
+    border-color: var(--ft-color-blue);
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+}
+
+.title {
+    margin-top: 8px;
+    font-size: var(--ft-font-size-small);
+}
+
+
+.active .icon,
+.active .title {
+    color: var(--ft-color-white);
+}
