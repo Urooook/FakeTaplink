@@ -17,7 +17,7 @@ const PageLoader = () => (
 	</div>
 )
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById('fakeTaplinkRoot')!).render(
 	<BrowserRouter>
 		<Provider store={store}>
 			<Suspense fallback={<PageLoader />}>

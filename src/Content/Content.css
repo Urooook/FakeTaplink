@@ -34,7 +34,4 @@ div[class='form-group'] > .invalid-feedback {
 
 .app-container {
 	width: 100%;
-	margin: 0 auto;
-	min-height: 80%;
-	/*margin-top: 50px;*/
 }

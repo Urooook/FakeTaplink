@@ -1,15 +1,13 @@
 import React, { ReactElement } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Routes, Route } from 'react-router-dom'
 
 import Main from '../Main/Main'
-
-const PrivateRoute = (): ReactElement => <Route path="/" element={<Main />} />
+import styles from './App.module.css'
 
 const App = (): ReactElement => (
-	<Routes>
-		<Route path="/" element={<Main />} />
-	</Routes>
+	<div className={styles.mainSection}>
+		<Main />
+	</div>
 )
 
 export default App

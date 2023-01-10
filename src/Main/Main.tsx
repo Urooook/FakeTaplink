@@ -82,18 +82,7 @@ const Main = (): ReactElement => {
 	// }
 	return (
 		<Routes>
-			<Route
-				path="*"
-				element={
-					<main
-						// className="col main-container"
-						id="mainContent"
-						// onClick={menuAutoClose}
-					>
-						<Content />
-					</main>
-				}
-			>
+			<Route path="*" element={<Content />}>
 				{/*<Header*/}
 				{/*  mobile={state.mobile}*/}
 				{/*  onMenuOpen={menuClick}*/}
