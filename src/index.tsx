@@ -1,28 +1,28 @@
-import React, { Suspense } from 'react';
-import ReactDOM from "react-dom/client";
-import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { Suspense } from 'react'
+import ReactDOM from 'react-dom/client'
+import { BrowserRouter } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
-import store from './store';
-import App from './App/App';
+import store from './store'
+import App from './App/App'
 
-import Loader from './components/Loader/Loader';
+import Loader from './components/Loader/Loader'
 
-import './index.css';
+import './index.css'
 
 const PageLoader = () => (
-    <div className="pre-loader-container">
-        <Loader />
-    </div>
-);
+	<div className="pre-loader-container">
+		<Loader />
+	</div>
+)
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
-    <BrowserRouter>
-        <Provider store={store}>
-            <Suspense fallback={<PageLoader />}>
-                <App />
-            </Suspense>
-        </Provider>
-    </BrowserRouter>
-);
+ReactDOM.createRoot(document.getElementById('root')!).render(
+	<BrowserRouter>
+		<Provider store={store}>
+			<Suspense fallback={<PageLoader />}>
+				<App />
+			</Suspense>
+		</Provider>
+	</BrowserRouter>,
+)

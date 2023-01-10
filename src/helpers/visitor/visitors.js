@@ -1,10 +1,10 @@
 export function on(eventName, cb) {
 	return {
 		visit: (...args) => {
-			if (eventName === args[ 0 ]) {
+			if (eventName === args[0]) {
 				cb(...args.slice(1))
 			}
-		}
+		},
 	}
 }
 
@@ -13,18 +13,18 @@ export function once(eventName, cb) {
 
 	return {
 		visit: (...args) => {
-			if (eventName === args[ 0 ] && !isVisited) {
+			if (eventName === args[0] && !isVisited) {
 				cb(...args.slice(1))
 				isVisited = true
 			}
-		}
+		},
 	}
 }
 
 export function inView(options = {}) {
 	let currentTarget = null
 
-	const handler = entries => {
+	const handler = (entries) => {
 		for (const entry of entries) {
 			if (entry.target === currentTarget) {
 				if (entry.intersectionRatio > 0) {
@@ -49,6 +49,6 @@ export function inView(options = {}) {
 			if (eventName === 'unmount') {
 				observer.unobserve(target)
 			}
-		}
+		},
 	}
 }
