@@ -1,0 +1,10 @@
+.container {
+    display: flex;
+    width: 100%;
+}
+
+.mainSection {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+}

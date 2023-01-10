@@ -3,7 +3,6 @@ import { repeat, seq } from '../../helpers/AsyncFunctions/helpers'
 import on from '../../helpers/AsyncFunctions/on'
 import { on as viewOn } from '../../helpers/visitor'
 import { DraggableElement } from './DraggableElement/DraggableElement'
-import { ControlBlock } from './ControlBlock/ControlBlock'
 
 const DraggableCanvas = () => {
 	const getNextElement = (cursorPosition: any, currentElement: any) => {
@@ -108,7 +107,6 @@ const DraggableCanvas = () => {
 					<DraggableElement key={Math.random()} accept={accept} elem={el} />
 				))}
 			</div>
-			<ControlBlock />
 		</div>
 	)
 }

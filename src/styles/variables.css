@@ -1,0 +1,9 @@
+:root {
+    --ft-color-white: #ffffff;
+    --ft-color-grey: #d3d3d3;
+    --ft-color-blue: #0095ff;
+
+    --ft-border-radius: 4px;
+
+    --ft-font-size-small: 12px;
+}
