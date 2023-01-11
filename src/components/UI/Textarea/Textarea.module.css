@@ -1,0 +1,13 @@
+.textarea {
+    display: block;
+    padding: 6px 8px;
+
+    border: 1px solid var(--ft-color-grey);
+    border-radius: var(--ft-border-radius);
+    outline: none;
+}
+
+.textarea:focus-within,
+.textarea:hover {
+    border-color: var(--ft-color-blue);
+}

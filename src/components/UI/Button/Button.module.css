@@ -1,0 +1,17 @@
+.button {
+    padding: 4px 12px;
+    display: inline-block;
+    color: var(--ft-color-white);
+    margin: 0;
+
+    border-radius: var(--ft-border-radius);
+    background: var(--ft-color-blue);
+
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+    cursor: pointer;
+}
+
+.button:hover,
+.button:focus {
+    background-color: var(--ft-color-darker-blue);
+}
