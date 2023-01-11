@@ -4,10 +4,9 @@ import { ControlButton } from './components/ControlButton/ControlButton'
 import { BiPaint } from 'react-icons/bi'
 import { BiFont } from 'react-icons/bi'
 import { BiCodeAlt } from 'react-icons/bi'
-import { useState } from 'react'
 
 const controls = [
-	{ title: 'Background', id: 'background', icon: <BiPaint className={stylesControlButton.icon} /> },
+	{ title: 'Themes', id: 'themes', icon: <BiPaint className={stylesControlButton.icon} /> },
 	{ title: 'Text', id: 'text', icon: <BiFont className={stylesControlButton.icon} /> },
 	{
 		title: 'HTML',
@@ -15,13 +14,13 @@ const controls = [
 		icon: <BiCodeAlt className={stylesControlButton.icon} />,
 	},
 ]
-export const ControlsSidebar = () => {
-	const [activeControl, setActiveControl] = useState<string | undefined>()
 
-	const handleControlButtonClick = (controldId: string) => {
-		setActiveControl(controldId)
-	}
+type ControlSidebarProps = {
+	activeControlId?: string
+	onControlClick: (controldId: string) => void
+}
 
+export const ControlsSidebar = ({ onControlClick, activeControlId }: ControlSidebarProps) => {
 	return (
 		<div className={styles.container}>
 			{controls.map((control) => {
@@ -30,8 +29,9 @@ export const ControlsSidebar = () => {
 						title={control.title}
 						icon={control.icon}
 						controlId={control.id}
-						isActive={control.id === activeControl}
-						onClick={handleControlButtonClick}
+						isActive={control.id === activeControlId}
+						onClick={onControlClick}
+						key={control.id}
 					/>
 				)
 			})}

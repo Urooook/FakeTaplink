@@ -1,0 +1,16 @@
+:root {
+    --ft-box-shadow-left: -12px 0 15px -4px rgba(168, 168, 168, 0.2);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 340px;
+    padding: 10px;
+
+    box-shadow: var(--ft-box-shadow-left), var(--ft-box-shadow-left);
+}
+
+.title {
+    margin-bottom: 12px;
+}
