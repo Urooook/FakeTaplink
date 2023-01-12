@@ -3,8 +3,7 @@ import { repeat, seq } from '../../../../helpers/AsyncFunctions/helpers'
 import on from '../../../../helpers/AsyncFunctions/on'
 import { on as viewOn } from '../../../../helpers/visitor'
 import { DraggableElement } from './DraggableElement/DraggableElement'
-import styles from './DraggableCanvas.module.css'
-import deStyles from './DraggableElement/DraggableElement.module.css'
+import './DraggableCanvas.css'
 
 const DraggableCanvas = () => {
 	const getNextElement = (cursorPosition: any, currentElement: any) => {
@@ -18,16 +17,16 @@ const DraggableCanvas = () => {
 	}
 
 	useEffect(() => {
-		const container = document.getElementById(styles.container)
+		const container = document.getElementById('container')
 
 		;(async function () {
 			const dnd = repeat(() => seq(on(container!, 'dragover'), on(container!, 'touchmove')))
 
 			// eslint-disable-next-line no-restricted-syntax
 			for await (const ev of dnd) {
-				const activeElement = container!.querySelector(deStyles.box)
+				const activeElement = container!.querySelector('.box')
 				const items = document.querySelectorAll('.items')
-				const currentElement = (ev.target as Element).classList.contains(deStyles.item)
+				const currentElement = (ev.target as Element).classList.contains('items')
 					? ev.target
 					: activeElement
 				const nextElement = getNextElement((ev as DragEvent).clientY, currentElement)
@@ -79,10 +78,7 @@ const DraggableCanvas = () => {
 	]
 
 	const addOutline1 = (e: any) => {
-		if (
-			e.target.parentNode.classList.contains(deStyles.item) ||
-			e.target.classList.contains(deStyles.item)
-		) {
+		if (e.target.parentNode.classList.contains('items') || e.target.classList.contains('items')) {
 			e.target.style.background = e.target.style.background === 'red' ? 'transparent' : 'red'
 		}
 	}
@@ -90,8 +86,8 @@ const DraggableCanvas = () => {
 	const accept = useMemo(
 		() => [
 			viewOn('click', addOutline1),
-			viewOn('dragstart', (evt: any) => (evt.target as Element).classList.add(deStyles.box)),
-			viewOn('dragend', (evt: any) => (evt.target as Element).classList.remove(deStyles.box)),
+			viewOn('dragstart', (evt: any) => (evt.target as Element).classList.add('box')),
+			viewOn('dragend', (evt: any) => (evt.target as Element).classList.remove('box')),
 			// inView({
 			//   enter: changeBgColor(),
 			//   leave: changeBgColor('#ebebeb'),
@@ -106,8 +102,8 @@ const DraggableCanvas = () => {
 	)
 
 	return (
-		<div className={styles.mobileContainer}>
-			<div id={styles.container} className={styles.containerMobileRadius}>
+		<div className="mobile-container">
+			<div id="container" className="container-mobile-radius">
 				{model.map((el) => (
 					<DraggableElement key={Math.random()} accept={accept} elem={el} />
 				))}

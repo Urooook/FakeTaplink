@@ -1,4 +1,4 @@
-.mobileContainer {
+.mobile-container {
     border: 10px solid var(--ft-color-black-light);
     border-radius: 45px;
     width: 430px;
@@ -6,7 +6,7 @@
 
 }
 
-.containerMobileRadius {
+.container-mobile-radius {
     border-radius: 35px;
 }
 
