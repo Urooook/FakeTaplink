@@ -1,18 +1,17 @@
 .mobileContainer {
-    border: 10px solid grey;
-    border-radius: 30px;
+    border: 10px solid var(--ft-color-black-light);
+    border-radius: 45px;
     width: 430px;
+    box-shadow: 43px 0 18px -8px rgb(168 168 168 / 0.25);
+
 }
 
 .containerMobileRadius {
-    border-radius: 20px;
+    border-radius: 35px;
 }
 
 #container {
-    min-height: 80%;
-    /*border: 1px solid black;*/
     position: relative;
-    background: black;
-    /*color: black;*/
+    background: var(--ft-color-darker-blue);
     padding: 20px;
 }
