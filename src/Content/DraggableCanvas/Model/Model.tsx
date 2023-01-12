@@ -66,35 +66,36 @@ export default class Model extends Component<ModelProps, ModelState>{
         console.log(evt.target.parentNode!.children)
         console.log([...model.values()].map((el: any) => el.props.id))
         const newPositions: number[] = [];
-        const newDraggableArray =[...evt.target.parentNode!.children]
+        const newDraggableArray: Element[] =[...evt.target.parentNode!.children]
         newDraggableArray.forEach((el: any) => {
-            console.log(el.id)
+            // console.log(el.id)
             return newPositions.push(Number(el.id))
         });
-        console.log(newDraggableArray[0].id)
-        const oldDraggableArray = [...model.values()];
-
+        // console.log(newDraggableArray[0].id)
+        const oldDraggableArray: unknown[] = [...model.values()];
+        // console.log(oldDraggableArray.length)
 
         const newModel: DoublyLinkedList = new DoublyLinkedList();
-        // this.deleteAll();
-        // let i =0;
 
-        console.log(this.state.model.length())
-        newPositions.forEach((el: any) => {
-           const pos = oldDraggableArray.find((item: JSX.Element) => {
-               console.log(item)
-               return item.props.id === el;
+        // this.deleteAll();
+        // let i=0;
+        let indexValue: number[] =[];
+
+        // console.log(this.state.model.length())
+        newPositions.forEach((el: number) => {
+            const pos = oldDraggableArray.find((item: any, index) => {
+                indexValue.push(index);
+                    return item.props.id === el;
            })
             newModel.push(pos);
-           // i++;
         })
-        this.deleteAll();
+        // this.deleteAll();
 
         this.setState({model: newModel})
         // console.log(this.state.modal)
 
 
-        // console.log(newPositions)
+        console.log(newPositions)
 
         // console.log('MODEL')
         // model = newModel
@@ -153,14 +154,11 @@ export default class Model extends Component<ModelProps, ModelState>{
         }
 
 
-    render(): ReactNode {
+    render(): any {
         const values = this.state ? [...this.values()] : null
         console.log('Render')
-        console.log(values);
-        return values?.map((el) => {
-            // console.log(el)
-            return (el)
-        });
+        console.log(values?.map((el: any) => el.props.id));
+        return values
         // return (<h1>123s</h1>);
     }
 
