@@ -16,6 +16,7 @@
 
 .box {
     border-color: red;
-    background: black;
+    background: var(--ft-color-grey);
+    opacity: 40%;
     position: absolute;
 }

@@ -14,7 +14,9 @@ export const MainPage = () => {
 		<div className={styles.container}>
 			<ControlsSidebar activeControlId={activeControlId} onControlClick={handleControlClick} />
 			<div className={styles.mainSection}>
-				<DraggableCanvas />
+				<div className={styles.mobileSecition}>
+					<DraggableCanvas />
+				</div>
 			</div>
 			<EditorSidebar currentEditor={activeControlId} />
 		</div>
