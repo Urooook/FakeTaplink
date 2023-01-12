@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef } from 'react';
 import { EventEmitter2 as Emitter } from 'eventemitter2';
 
 const withWisitor = (WrappedComponent) => ({ accept = [], ...restProps }) => {
+  // console.log(accept)
   const ref = useRef(null);
 
   const emitter = useMemo(

@@ -10,9 +10,13 @@ import {
 import Content from '../Content/Content';
 
 import './Main.css';
+import DoublyLinkedList from "../helpers/DataStructures/DoublyLinkedList/DoublyLinkedList";
 
 
 const Main = (): ReactElement => {
+    // const dd = new DoublyLinkedList([12,23]);
+    // dd.push();
+    // console.log([...dd.values()])
   // const history = useHistory();
   // const dispatch = useDispatch();
   // const {
