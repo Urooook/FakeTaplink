@@ -1,5 +1,5 @@
 import styles from './MainPage.module.css'
-import { DraggableCanvas } from '../DraggableCanvas/DraggableCanvas'
+import { DraggableCanvas } from './components/DraggableCanvas/DraggableCanvas'
 import { ControlsSidebar } from './components/ControlsSidebar/ControlsSidebar'
 import { EditorSidebar } from './components/EditorSidebar/EditorSidebar'
 import { useState } from 'react'
