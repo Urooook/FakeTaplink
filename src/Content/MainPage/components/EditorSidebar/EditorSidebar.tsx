@@ -2,6 +2,7 @@ import styles from './EditorSidebar.module.css'
 import { TextEditor } from './components/TextEditor/TextEditor'
 import { ThemeEditor } from './components/ThemeEditor/ThemeEditor'
 import { useMemo } from 'react'
+import {HtmlEditor} from "./components/HtmlEditor/HtmlEditor";
 
 type EditorSidebarProps = {
 	currentEditor: string
@@ -14,6 +15,8 @@ export const EditorSidebar = ({ currentEditor }: EditorSidebarProps) => {
 				return <ThemeEditor />
 			case 'text':
 				return <TextEditor />
+			case 'html':
+				return <HtmlEditor />
 			default:
 				return <></>
 		}
