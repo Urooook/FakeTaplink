@@ -1,5 +1,6 @@
 import React from 'react'
-import { withVisitor } from '../../../helpers/visitor'
+import { withVisitor } from '../../../../../helpers/visitor'
+import styles from './DraggableElement.module.css'
 
 interface DraggableElementProps {
 	ctx: any
@@ -8,7 +9,7 @@ interface DraggableElementProps {
 
 const DraggableElementShell = ({ ctx, elem }: DraggableElementProps) => (
 	<div
-		className="items"
+		className={styles.item}
 		draggable
 		ref={ctx}
 		onClick={ctx.emit.bind(null, 'click')}

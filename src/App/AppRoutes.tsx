@@ -1,11 +1,10 @@
 import React, { ReactElement } from 'react'
 import { Route, Routes } from 'react-router-dom'
-import './Content.css'
 
-import DefaultPage from './DefaultPage/DefaultPage'
-import { MainPage } from './MainPage/MainPage'
+import DefaultPage from '../Pages/DefaultPage/DefaultPage'
+import { MainPage } from '../Pages/MainPage/MainPage'
 
-export default function Content(): ReactElement {
+export default function AppRoutes(): ReactElement {
 	return (
 		<Routes>
 			<Route path="/" element={<MainPage />} />
