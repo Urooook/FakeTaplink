@@ -1,3 +1,7 @@
+.pre-loader-container {
+	margin-top: calc(50vh - 85px);
+}
+
 .pre-loader {
 	position: relative;
 	margin: auto;

@@ -1,11 +1,17 @@
-import React, { ReactElement } from 'react'
+import React, { ReactElement, Suspense } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import styles from './App.module.css'
 import AppRoutes from './AppRoutes'
+import { BrowserRouter } from 'react-router-dom'
+import Loader from '../components/Loader/Loader'
 
 const App = (): ReactElement => (
 	<div className={styles.mainSection}>
-		<AppRoutes />
+		<Suspense fallback={<Loader />}>
+			<BrowserRouter>
+				<AppRoutes />
+			</BrowserRouter>
+		</Suspense>
 	</div>
 )
 
