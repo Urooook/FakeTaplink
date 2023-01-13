@@ -1,5 +1,6 @@
 import { PropsWithChildren } from 'react'
 import styles from './Button.module.css'
+import cn from 'classnames'
 
 type ButtonProps = PropsWithChildren<{
 	className?: string
@@ -10,7 +11,7 @@ type ButtonProps = PropsWithChildren<{
 
 export const Button = ({ className, onClick, children, disabled, ...restProps }: ButtonProps) => {
 	return (
-		<button className={styles.button} disabled={disabled} onClick={onClick}>
+		<button className={cn(styles.button, className)} disabled={disabled} onClick={onClick}>
 			{children}
 		</button>
 	)
