@@ -1,9 +1,10 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useContext, useEffect, useMemo } from 'react'
 import { repeat, seq } from '../../../../helpers/AsyncFunctions/helpers'
 import on from '../../../../helpers/AsyncFunctions/on'
 import { on as viewOn } from '../../../../helpers/visitor'
 import { DraggableElement } from './DraggableElement/DraggableElement'
 import './DraggableCanvas.css'
+import { BlocksContext } from '../../context'
 
 const DraggableCanvas = () => {
 	const getNextElement = (cursorPosition: any, currentElement: any) => {
@@ -15,6 +16,8 @@ const DraggableCanvas = () => {
 
 		return nextElement
 	}
+
+	const { blocks: model } = useContext(BlocksContext)
 
 	useEffect(() => {
 		const container = document.getElementById('container')
@@ -42,40 +45,40 @@ const DraggableCanvas = () => {
 		})()
 	}, [])
 
-	const model = [
-		<div>
-			11 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, amet blanditiis ea fugiat
-			laborum maxime quisquam soluta sunt ut voluptatibus.
-		</div>,
-		<div>
-			22Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, amet blanditiis ea fugiat
-			laborum maxime quisquam soluta sunt ut voluptatibus.
-		</div>,
-		<div>
-			33Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, amet blanditiis ea fugiat
-			laborum maxime quisquam soluta sunt ut voluptatibus.
-		</div>,
-		<div>
-			44Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, amet blanditiis ea fugiat
-			laborum maxime quisquam soluta sunt ut voluptatibus.
-		</div>,
-		<div>
-			11 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, amet blanditiis ea fugiat
-			laborum maxime quisquam soluta sunt ut voluptatibus.
-		</div>,
-		<div>
-			22Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, amet blanditiis ea fugiat
-			laborum maxime quisquam soluta sunt ut voluptatibus.
-		</div>,
-		<div>
-			33Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, amet blanditiis ea fugiat
-			laborum maxime quisquam soluta sunt ut voluptatibus.
-		</div>,
-		<div>
-			44Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, amet blanditiis ea fugiat
-			laborum maxime quisquam soluta sunt ut voluptatibus.
-		</div>,
-	]
+	// const model = [
+	// 	<div>
+	// 		11 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, amet blanditiis ea fugiat
+	// 		laborum maxime quisquam soluta sunt ut voluptatibus.
+	// 	</div>,
+	// 	<div>
+	// 		22Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, amet blanditiis ea fugiat
+	// 		laborum maxime quisquam soluta sunt ut voluptatibus.
+	// 	</div>,
+	// 	<div>
+	// 		33Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, amet blanditiis ea fugiat
+	// 		laborum maxime quisquam soluta sunt ut voluptatibus.
+	// 	</div>,
+	// 	<div>
+	// 		44Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, amet blanditiis ea fugiat
+	// 		laborum maxime quisquam soluta sunt ut voluptatibus.
+	// 	</div>,
+	// 	<div>
+	// 		11 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, amet blanditiis ea fugiat
+	// 		laborum maxime quisquam soluta sunt ut voluptatibus.
+	// 	</div>,
+	// 	<div>
+	// 		22Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, amet blanditiis ea fugiat
+	// 		laborum maxime quisquam soluta sunt ut voluptatibus.
+	// 	</div>,
+	// 	<div>
+	// 		33Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, amet blanditiis ea fugiat
+	// 		laborum maxime quisquam soluta sunt ut voluptatibus.
+	// 	</div>,
+	// 	<div>
+	// 		44Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, amet blanditiis ea fugiat
+	// 		laborum maxime quisquam soluta sunt ut voluptatibus.
+	// 	</div>,
+	// ]
 
 	const addOutline1 = (e: any) => {
 		if (e.target.parentNode.classList.contains('items') || e.target.classList.contains('items')) {
@@ -104,8 +107,11 @@ const DraggableCanvas = () => {
 	return (
 		<div className="mobile-container">
 			<div id="container" className="container-mobile-radius">
-				{model.map((el) => (
-					<DraggableElement key={Math.random()} accept={accept} elem={el} />
+				{/*{[model.values()].map((el) => (*/}
+				{/*	<DraggableElement key={Math.random()} accept={accept} elem={el} />*/}
+				{/*))}*/}
+				{[...model.values()].map((block) => (
+					<DraggableElement key={block.id} accept={accept} elem={block.component} />
 				))}
 			</div>
 		</div>
