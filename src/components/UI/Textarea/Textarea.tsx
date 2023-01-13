@@ -2,22 +2,20 @@ import styles from './Textarea.module.css'
 import cn from 'classnames'
 
 type TextAreaProps = {
-	value?: string
+	value?: any
 	placeholder?: string
 	className?: string
-	child?: any
 
 	onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
 }
-export const Textarea = ({ value, placeholder, className, onChange, child }: TextAreaProps) => {
+export const Textarea = ({ value, placeholder, className, onChange }: TextAreaProps) => {
+	console.log(value)
 	return (
 		<textarea
-			value={value}
+			value={value.res}
 			placeholder={placeholder}
 			className={cn(styles.textarea, className)}
 			onChange={onChange}
-		>
-			{child}
-		</textarea>
+		/>
 	)
 }

@@ -96,7 +96,7 @@ export function take(
 ): Parser<string, string> {
     return function* (source, prev) {
         const
-            {min = 1, max = Infinity} = opts;
+            {min = 0, max = Infinity} = opts;
 
         const
             buffer: string[] = [];
@@ -206,7 +206,7 @@ export function seq(
             while (true) {
                 const
                     chunk = parsing.next(data);
-
+                console.log(chunk)
                 if (chunk.done) {
                     prev = chunk.value[0];
                     value.push(prev);
@@ -216,8 +216,9 @@ export function seq(
 
                 } else {
                     if (chunk.value === ParserState.EXPECT_NEW_INPUT) {
+                        console.log( yield chunk.value)
                         data = yield chunk.value;
-
+                        console.log('DATA', data)
                     } else {
                         yield chunk.value;
                     }
@@ -300,6 +301,10 @@ export function or(
                     }
 
                 } catch (err) {
+                    // prev = {
+                    //     iter,
+                    //     yields: yields.splice(),
+                    // }
                     iter = buffer.length > 0 ? iterSeq(buffer, iter) : iter;
                     yields.splice(0, yields.length);
                     break;

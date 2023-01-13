@@ -5,6 +5,8 @@ import {Button} from "../../../../../../components/UI/Button/Button";
 import {opt, or, repeat, seq, tag, take, ws} from "../../../../../../helpers/Parser/Factories";
 import {binsearchKey} from "../../../../../../helpers/Parser/htmlTags";
 import {Parser} from "../../../../../../helpers/Parser/types";
+import parse from "html-react-parser";
+import Editor from "react-simple-code-editor";
 
 type parserResult = {
     res: string,
@@ -13,7 +15,8 @@ type parserResult = {
 
 export const HtmlEditor = () => {
     const [errors, setErrors] = useState<string[]>([])
-    const [html, setHtml] = useState<any>('')
+    const [html, setHtml] = useState<string>('')
+    const [compile, setCompile] = useState(false)
 
     const xmlNameRgxp = /[^ <>"'=/]/;
 
@@ -70,6 +73,28 @@ export const HtmlEditor = () => {
         ),
         {min: 0}
     )
+
+    const htmlP = xml('<div>23');
+    // htmlP.next()
+    // console.log(htmlP.next('</div>'))
+    // // @ts-ignore
+    // console.log([...htmlP])
+    const ll = tag(['<',/[a-z]/,/[a-z]/,/[a-z]/,'>'])
+
+    const xmlTag1 = xmlTag('<di');
+    xmlTag1.next()
+    console.log(xmlTag1.next('v>'))
+
+
+
+    const write = (str: any) => {
+        console.log(str)
+        htmlP.next()
+        htmlP.next(str)
+        // @ts-ignore
+        console.log([...ggwp])
+    }
+
 
     const parseHtml = (html: string) => {
         const tokens  = xml(html.replace(/(\s)\1+/gm, '').replace(/\n/gm, ''));
@@ -128,30 +153,11 @@ export const HtmlEditor = () => {
         }
 
         // while ()
-
+        setCompile(true)
         // console.log(stackStartTags)
         // console.log(stackEndTags)
         return {res, errors: errorMessages};
     }
-
-
-//    const a = xml(`
-//      <div >
-// <b >qwe</b>
-// <li>
-// <a>dddd</a>
-// sdsd
-// </li>
-// </div>
-//     `)
-// a.next();
-//
-//     console.log(    a.next(`<a>dddd</a>
-// sdsd
-// </li>
-// </div>`))
-
-
 
     const parseHtmlObject = () => {
         // @ts-ignore
@@ -161,30 +167,32 @@ export const HtmlEditor = () => {
         })
     }
 
-    // parseHtmlObject();
-
-    // setHtml(parseHtmlObject)
-
-
     return (
         <>
             {
                 errors.length > 0 && errors.map((err) => <div style={{color: 'red'}}>{err}</div>)
             }
 
-            <Textarea
+            <Editor
                 value={html}
-                onChange={(e) => setHtml(e.target.value)}
+                onValueChange={code => write(code)}
                 className={styles.htmlCode}
                 placeholder={'Some text...'}
+                highlight={hl => compile ? <pre>
+                        <code><div dangerouslySetInnerHTML={{ __html: hl }} /></code>
+                </pre> : <pre><code>{hl}</code></pre>}
+                style={{
+                    color: 'black'
+                }}
             />
 
+
             <pre>
-                <code>
+                {/*<code>*/}
                    {/*<textarea>*/}
-                        <div dangerouslySetInnerHTML={{ __html: html }} />
+
                    {/*</textarea>*/}
-                </code>
+                {/*</code>*/}
             </pre>
 
             <Button onClick={parseHtmlObject}>Remove</Button>
