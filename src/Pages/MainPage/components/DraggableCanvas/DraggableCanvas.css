@@ -16,4 +16,5 @@
     position: relative;
     background: var(--ft-color-darker-blue);
     padding: 20px;
+    transition: background-color 0.2s, color 0.2s;
 }

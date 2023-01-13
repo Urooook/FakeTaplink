@@ -5,6 +5,7 @@ import { on as viewOn } from '../../../../helpers/visitor'
 import { DraggableElement } from './DraggableElement/DraggableElement'
 import './DraggableCanvas.css'
 import { BlocksContext } from '../../blocksContext'
+import { ThemeContext } from '../../themeContext'
 
 const DraggableCanvas = () => {
 	const getNextElement = (cursorPosition: any, currentElement: any) => {
@@ -18,6 +19,9 @@ const DraggableCanvas = () => {
 	}
 
 	const { blocks: model } = useContext(BlocksContext)
+	const {
+		theme: { color, backgroundColor },
+	} = useContext(ThemeContext)
 
 	useEffect(() => {
 		const container = document.getElementById('container')
@@ -106,7 +110,7 @@ const DraggableCanvas = () => {
 
 	return (
 		<div className="mobile-container">
-			<div id="container" className="container-mobile-radius">
+			<div id="container" className="container-mobile-radius" style={{ color, backgroundColor }}>
 				{/*{[model.values()].map((el) => (*/}
 				{/*	<DraggableElement key={Math.random()} accept={accept} elem={el} />*/}
 				{/*))}*/}

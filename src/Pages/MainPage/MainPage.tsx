@@ -5,6 +5,8 @@ import { EditorSidebar } from './components/EditorSidebar/EditorSidebar'
 import { useCallback, useState } from 'react'
 import { Block, BlockId, BlocksContext } from './blocksContext'
 import { ControlIds } from './components/ControlsSidebar/enum'
+import { Theme, ThemeContext } from './themeContext'
+import { getCssVariable } from '../../helpers/getCssVariable'
 
 const DEFAULT_CONTROL = ControlIds.themes
 
@@ -12,6 +14,12 @@ export const MainPage = () => {
 	const [activeControlId, setActiveControlId] = useState<string>(DEFAULT_CONTROL)
 	const [blocks, setBlocks] = useState<Map<BlockId, Block>>(new Map<BlockId, Block>())
 	const [activeBlock, setActiveBlock] = useState<Block | null>(null)
+	const [theme, setTheme] = useState<Theme>(() => {
+		return {
+			color: getCssVariable('--ft-color-white'),
+			backgroundColor: getCssVariable('--ft-color-blue'),
+		}
+	})
 
 	const handleAddBlock = useCallback(
 		(newBlock: Block) => {
@@ -43,24 +51,26 @@ export const MainPage = () => {
 	}
 
 	return (
-		<BlocksContext.Provider
-			value={{
-				blocks,
-				activeBlock,
-				onAddBlock: handleAddBlock,
-				onDeleteBlock: handleDeleteBlock,
-				onChangeActiveBlock: setActiveBlock,
-			}}
-		>
-			<div className={styles.container}>
-				<ControlsSidebar activeControlId={activeControlId} onControlClick={handleControlClick} />
-				<div className={styles.mainSection}>
-					<div className={styles.mobileSecition}>
-						<DraggableCanvas />
+		<ThemeContext.Provider value={{ theme, onThemeChange: setTheme }}>
+			<BlocksContext.Provider
+				value={{
+					blocks,
+					activeBlock,
+					onAddBlock: handleAddBlock,
+					onDeleteBlock: handleDeleteBlock,
+					onChangeActiveBlock: setActiveBlock,
+				}}
+			>
+				<div className={styles.container}>
+					<ControlsSidebar activeControlId={activeControlId} onControlClick={handleControlClick} />
+					<div className={styles.mainSection}>
+						<div className={styles.mobileSecition}>
+							<DraggableCanvas />
+						</div>
 					</div>
+					<EditorSidebar currentEditor={activeControlId} />
 				</div>
-				<EditorSidebar currentEditor={activeControlId} />
-			</div>
-		</BlocksContext.Provider>
+			</BlocksContext.Provider>
+		</ThemeContext.Provider>
 	)
 }
