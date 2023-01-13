@@ -1,8 +1,8 @@
 import { createContext, ReactNode } from 'react'
 
-export type Block = ComponentBlock & (TextBlockProps | LinkBlockProps)
+export type Block = ComponentBlock<TextBlockProps | LinkBlockProps>
 
-type ComponentBlock = { id?: BlockId; component: ReactNode }
+export type ComponentBlock<T> = { id?: BlockId; component: ReactNode; value: T }
 
 export type TextBlockProps = {
 	text: string
