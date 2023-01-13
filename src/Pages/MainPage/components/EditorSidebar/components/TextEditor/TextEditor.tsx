@@ -2,7 +2,7 @@ import { Textarea } from '../../../../../../components/UI/Textarea/Textarea'
 import { Button } from '../../../../../../components/UI/Button/Button'
 import styles from './TextEditor.module.css'
 import { useContext, useEffect } from 'react'
-import { BlocksContext, TextBlockProps } from '../../../../context'
+import { BlocksContext, ComponentBlock, TextBlockProps } from '../../../../context'
 import { TextBlock } from '../../../blocks/TextBlock/TextBlock'
 
 const initialTextEditorState: TextBlockProps = {
@@ -14,7 +14,7 @@ export const TextEditor = () => {
 	// TODO подмуать над зависимостями
 	useEffect(() => {
 		if (!activeBlock && onAddBlock) {
-			onAddBlock({ ...initialTextEditorState, component: <TextBlock text={''} /> })
+			onAddBlock({ value: { ...initialTextEditorState }, component: <TextBlock text={''} /> })
 		}
 	}, [activeBlock])
 
@@ -22,27 +22,32 @@ export const TextEditor = () => {
 		return null
 	}
 
-	const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+	const handleInputChange = (
+		e: React.ChangeEvent<HTMLTextAreaElement>,
+		valueProp: keyof TextBlockProps,
+	) => {
 		if (activeBlock?.id) {
-			const currentBlock = blocks.get(activeBlock?.id)
+			const currentBlock = blocks.get(activeBlock?.id) as ComponentBlock<TextBlockProps>
 
 			if (currentBlock) {
-				currentBlock.text = e.target.value
-				onAddBlock({ ...currentBlock, component: <TextBlock text={currentBlock.text} /> })
+				currentBlock.value[valueProp] = e.target.value
+				onAddBlock({
+					...currentBlock,
+					component: <TextBlock text={currentBlock.value.text} />,
+				})
 			}
 		}
 	}
 
 	const handleDeleteBlock = () => {
-		console.log('remove', activeBlock?.id)
 		onDeleteBlock(activeBlock?.id)
 	}
 
 	return (
 		<>
 			<Textarea
-				value={activeBlock?.text}
-				onChange={handleInputChange}
+				value={activeBlock?.value.text}
+				onChange={(e) => handleInputChange(e, 'text')}
 				className={styles.textarea}
 				placeholder={'Some text...'}
 			/>
