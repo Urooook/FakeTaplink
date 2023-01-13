@@ -2,7 +2,7 @@ import { Textarea } from '../../../../../../components/UI/Textarea/Textarea'
 import { Button } from '../../../../../../components/UI/Button/Button'
 import styles from './TextEditor.module.css'
 import { useContext, useEffect } from 'react'
-import { BlocksContext, ComponentBlock, TextBlockProps } from '../../../../context'
+import { BlocksContext, ComponentBlock, TextBlockProps } from '../../../../blocksContext'
 import { TextBlock } from '../../../blocks/TextBlock/TextBlock'
 
 const initialTextEditorState: TextBlockProps = {

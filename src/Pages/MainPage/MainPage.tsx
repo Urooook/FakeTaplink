@@ -3,7 +3,7 @@ import { DraggableCanvas } from './components/DraggableCanvas/DraggableCanvas'
 import { ControlsSidebar } from './components/ControlsSidebar/ControlsSidebar'
 import { EditorSidebar } from './components/EditorSidebar/EditorSidebar'
 import { useCallback, useState } from 'react'
-import { Block, BlockId, BlocksContext } from './context'
+import { Block, BlockId, BlocksContext } from './blocksContext'
 import { ControlIds } from './components/ControlsSidebar/enum'
 
 const DEFAULT_CONTROL = ControlIds.themes
