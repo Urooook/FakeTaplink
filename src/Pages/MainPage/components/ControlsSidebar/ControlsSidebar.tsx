@@ -1,17 +1,31 @@
 import styles from './ControlsSidebar.module.css'
 import stylesControlButton from './components/ControlButton/ControlButton.module.css'
 import { ControlButton } from './components/ControlButton/ControlButton'
-import { BiPaint } from 'react-icons/bi'
-import { BiFont } from 'react-icons/bi'
-import { BiCodeAlt } from 'react-icons/bi'
+import { BiFont, BiPaint, BiCodeAlt, BiImageAdd, BiLinkAlt, BiNetworkChart } from 'react-icons/bi'
+import { ControlIds } from './enum'
 
 const controls = [
-	{ title: 'Themes', id: 'themes', icon: <BiPaint className={stylesControlButton.icon} /> },
-	{ title: 'Text', id: 'text', icon: <BiFont className={stylesControlButton.icon} /> },
+	{ title: 'Тема', id: ControlIds.themes, icon: <BiPaint className={stylesControlButton.icon} /> },
+	{ title: 'Текст', id: ControlIds.text, icon: <BiFont className={stylesControlButton.icon} /> },
 	{
 		title: 'HTML',
-		id: 'html',
+		id: ControlIds.html,
 		icon: <BiCodeAlt className={stylesControlButton.icon} />,
+	},
+	{
+		title: 'Ссылка',
+		id: ControlIds.link,
+		icon: <BiLinkAlt className={stylesControlButton.icon} />,
+	},
+	{
+		title: 'Изображение',
+		id: ControlIds.image,
+		icon: <BiImageAdd className={stylesControlButton.icon} />,
+	},
+	{
+		title: 'Соцсети',
+		id: ControlIds.social,
+		icon: <BiNetworkChart className={stylesControlButton.icon} />,
 	},
 ]
 

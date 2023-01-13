@@ -1,9 +1,10 @@
 .mobile-container {
+    display: flex;
     border: 10px solid var(--ft-color-black-light);
     border-radius: 45px;
     width: 430px;
+    min-height: 700px;
     box-shadow: 43px 0 18px -8px rgb(168 168 168 / 0.25);
-
 }
 
 .container-mobile-radius {
@@ -11,6 +12,7 @@
 }
 
 #container {
+    flex: 1;
     position: relative;
     background: var(--ft-color-darker-blue);
     padding: 20px;

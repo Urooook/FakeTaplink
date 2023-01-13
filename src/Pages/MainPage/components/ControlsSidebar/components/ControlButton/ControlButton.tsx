@@ -1,6 +1,7 @@
 import styles from './ControlButton.module.css'
 import cn from 'classnames'
-import { ReactNode } from 'react'
+import { ReactNode, useContext } from 'react'
+import { BlocksContext } from '../../../../context'
 
 type ControlButtonProps = {
 	title: string
@@ -17,8 +18,14 @@ export const ControlButton = ({
 	isActive = false,
 	onClick,
 }: ControlButtonProps) => {
+	const { onChangeActiveBlock } = useContext(BlocksContext)
+
+	if (!onChangeActiveBlock) {
+		return null
+	}
 	const handleClick = () => {
 		onClick(controlId)
+		onChangeActiveBlock(null)
 	}
 	return (
 		<div className={cn(styles.container, { [styles.active]: isActive })} onClick={handleClick}>
