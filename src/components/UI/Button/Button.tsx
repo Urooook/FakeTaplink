@@ -1,6 +1,7 @@
-import { PropsWithChildren } from 'react'
+import { ButtonHTMLAttributes, PropsWithChildren } from 'react'
 import styles from './Button.module.css'
 import cn from 'classnames'
+import { forwardRef } from 'react'
 
 type ButtonProps = PropsWithChildren<{
 	className?: string
@@ -9,10 +10,19 @@ type ButtonProps = PropsWithChildren<{
 	onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
 }>
 
-export const Button = ({ className, onClick, children, disabled, ...restProps }: ButtonProps) => {
-	return (
-		<button className={cn(styles.button, className)} disabled={disabled} onClick={onClick}>
-			{children}
-		</button>
-	)
-}
+type HTMLButtonProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, keyof ButtonProps>
+
+export const Button = forwardRef<HTMLButtonElement, ButtonProps & HTMLButtonProps>(
+	({ className, onClick, children, disabled, ...restProps }, ref) => {
+		return (
+			<button
+				className={cn(styles.button, className)}
+				disabled={disabled}
+				onClick={onClick}
+				{...restProps}
+			>
+				{children}
+			</button>
+		)
+	},
+)
