@@ -4,7 +4,7 @@ import on from '../../../../helpers/AsyncFunctions/on'
 import { on as viewOn } from '../../../../helpers/visitor'
 import { DraggableElement } from './DraggableElement/DraggableElement'
 import './DraggableCanvas.css'
-import { BlocksContext } from '../../context'
+import { BlocksContext } from '../../blocksContext'
 
 const DraggableCanvas = () => {
 	const getNextElement = (cursorPosition: any, currentElement: any) => {

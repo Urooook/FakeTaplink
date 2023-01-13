@@ -1,5 +1,5 @@
 import styles from './LinkBlock.module.css'
-import { LinkBlockProps } from '../../../context'
+import { LinkBlockProps } from '../../../blocksContext'
 import { Button } from '../../../../../components/UI/Button/Button'
 
 export const LinkBlock = ({ text, link }: LinkBlockProps) => {

@@ -1,7 +1,7 @@
 import styles from './ControlButton.module.css'
 import cn from 'classnames'
 import { ReactNode, useContext } from 'react'
-import { BlocksContext } from '../../../../context'
+import { BlocksContext } from '../../../../blocksContext'
 
 type ControlButtonProps = {
 	title: string
