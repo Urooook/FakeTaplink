@@ -2,6 +2,7 @@ import { Block, CompoentNames } from '../Pages/MainPage/blocksContext'
 import { TextBlock } from '../Pages/MainPage/components/blocks/TextBlock/TextBlock'
 import { LinkBlock } from '../Pages/MainPage/components/blocks/LinkBlock/LinkBlock'
 import {HtmlBlock} from "../Pages/MainPage/components/blocks/HtmlBlock/HtmlBlock";
+import {ImageBlock} from "../Pages/MainPage/components/blocks/ImageBlock/ImageBlock";
 
 export const getComponentFromComponentNames = (block: Block): Block => {
 	if (!block.componentName) {
@@ -16,4 +17,5 @@ const components = {
 	[CompoentNames.TextBlock]: TextBlock,
 	[CompoentNames.LinkBlock]: LinkBlock,
 	[CompoentNames.HtmlLink]: HtmlBlock,
+	[CompoentNames.ImageLink]: ImageBlock,
 }

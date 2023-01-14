@@ -5,6 +5,7 @@ import { useMemo } from 'react'
 import { LinkEditor } from './components/LinkEditor/LinkEditor'
 import { ControlIds } from '../ControlsSidebar/enum'
 import { HtmlEditor } from './components/HtmlEditor/HtmlEditor'
+import {ImageEditor} from "./components/ImageEditor/ImageEditor";
 
 type EditorSidebarProps = {
 	currentEditor: string
@@ -21,6 +22,8 @@ export const EditorSidebar = ({ currentEditor }: EditorSidebarProps) => {
 				return <LinkEditor />
 			case ControlIds.html:
 				return <HtmlEditor />
+			case ControlIds.image:
+				return <ImageEditor />
 			default:
 				return <></>
 		}

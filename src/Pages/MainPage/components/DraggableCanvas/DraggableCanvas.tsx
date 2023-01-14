@@ -88,6 +88,8 @@ const DraggableCanvas = () => {
 		if (e.target.parentNode.classList.contains('items') || e.target.classList.contains('items')) {
 			e.target.style.background = e.target.style.background === 'red' ? 'transparent' : 'red'
 		}
+		console.log(e.target)
+
 	}
 
 	const accept = useMemo(
@@ -115,7 +117,7 @@ const DraggableCanvas = () => {
 				{/*	<DraggableElement key={Math.random()} accept={accept} elem={el} />*/}
 				{/*))}*/}
 				{[...model.values()].map((block) => (
-					<DraggableElement key={block.id} accept={accept} elem={block.component} />
+					<DraggableElement key={block.id} accept={accept} elem={block.component} boss={1} />
 				))}
 			</div>
 		</div>
