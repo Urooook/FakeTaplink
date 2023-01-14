@@ -21,6 +21,10 @@
     margin-right: 0;
 }
 
+.activeThemeItem {
+    border: 3px solid var(--ft-color-blue) !important;
+}
+
 .icon {
     width: 30px;
     height: 30px;

@@ -4,9 +4,10 @@ import { getCssVariable } from '../../../../../../helpers/getCssVariable'
 import { useContext } from 'react'
 import { useTheme } from './useTheme'
 import { ThemeContext } from '../../../../themeContext'
+import cn from 'classnames'
 
 export const ThemeEditor = () => {
-	const { onThemeChange } = useContext(ThemeContext)
+	const { theme, onThemeChange } = useContext(ThemeContext)
 	const themes = useTheme()
 
 	if (!onThemeChange) {
@@ -18,7 +19,7 @@ export const ThemeEditor = () => {
 			{themes.map(({ backgroundColor, textColor, id }) => (
 				<div
 					key={id}
-					className={styles.themeItem}
+					className={cn(styles.themeItem, { [styles.activeThemeItem]: theme.id === id })}
 					style={{
 						backgroundColor,
 						color: textColor,
@@ -26,6 +27,7 @@ export const ThemeEditor = () => {
 					}}
 					onClick={() =>
 						onThemeChange({
+							id,
 							color: textColor,
 							backgroundColor: backgroundColor || getCssVariable('--ft-color-white'),
 						})

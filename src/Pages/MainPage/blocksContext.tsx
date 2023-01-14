@@ -1,12 +1,14 @@
 import { createContext, ReactNode } from 'react'
 
-export type Block = ComponentBlock<TextBlockProps | LinkBlockProps | ImageBlockProps>
+export type Block = ComponentBlock<
+	TextBlockProps | LinkBlockProps | ImageBlockProps | HtmlBlockProps
+>
 
 export enum CompoentNames {
-	TextBlock = 'TextBlock',
-	LinkBlock = 'LinkBlock',
-	HtmlLink = 'HtmlLink',
-	ImageLink = 'ImageLink'
+	TextBlock = 'Текст',
+	LinkBlock = 'Ссылка',
+	HtmlBlock = 'HTML',
+	ImageBlock = 'Изображение',
 }
 
 export type ComponentBlock<T> = {
@@ -18,6 +20,10 @@ export type ComponentBlock<T> = {
 
 export type TextBlockProps = {
 	text: string
+}
+
+export type HtmlBlockProps = {
+	html: string
 }
 
 export type LinkBlockProps = {

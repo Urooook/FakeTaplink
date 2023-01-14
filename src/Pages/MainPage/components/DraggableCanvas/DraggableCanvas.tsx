@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo } from 'react'
+import React, { useCallback, useContext, useEffect, useMemo } from 'react'
 import { repeat, seq } from '../../../../helpers/AsyncFunctions/helpers'
 import on from '../../../../helpers/AsyncFunctions/on'
 import { on as viewOn } from '../../../../helpers/visitor'
@@ -8,6 +8,11 @@ import { BlocksContext } from '../../blocksContext'
 import { ThemeContext } from '../../themeContext'
 
 const DraggableCanvas = () => {
+	const { blocks: model, onChangeActiveBlock } = useContext(BlocksContext)
+	const {
+		theme: { color, backgroundColor },
+	} = useContext(ThemeContext)
+
 	const getNextElement = (cursorPosition: any, currentElement: any) => {
 		const currentElementCoord = currentElement.getBoundingClientRect()
 		const currentElementCenter = currentElementCoord.y + currentElementCoord.height / 2
@@ -17,11 +22,6 @@ const DraggableCanvas = () => {
 
 		return nextElement
 	}
-
-	const { blocks: model, onChangeActiveBlock } = useContext(BlocksContext)
-	const {
-		theme: { color, backgroundColor },
-	} = useContext(ThemeContext)
 
 	useEffect(() => {
 		const container = document.getElementById('container')
@@ -44,84 +44,35 @@ const DraggableCanvas = () => {
 				} else {
 					activeElement && activeElement.parentNode!.insertBefore(activeElement, nextElement)
 				}
-				// nextElement.style.background = 'transparent';
 			}
 		})()
 	}, [])
 
-	// const model = [
-	// 	<div>
-	// 		11 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, amet blanditiis ea fugiat
-	// 		laborum maxime quisquam soluta sunt ut voluptatibus.
-	// 	</div>,
-	// 	<div>
-	// 		22Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, amet blanditiis ea fugiat
-	// 		laborum maxime quisquam soluta sunt ut voluptatibus.
-	// 	</div>,
-	// 	<div>
-	// 		33Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, amet blanditiis ea fugiat
-	// 		laborum maxime quisquam soluta sunt ut voluptatibus.
-	// 	</div>,
-	// 	<div>
-	// 		44Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, amet blanditiis ea fugiat
-	// 		laborum maxime quisquam soluta sunt ut voluptatibus.
-	// 	</div>,
-	// 	<div>
-	// 		11 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, amet blanditiis ea fugiat
-	// 		laborum maxime quisquam soluta sunt ut voluptatibus.
-	// 	</div>,
-	// 	<div>
-	// 		22Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, amet blanditiis ea fugiat
-	// 		laborum maxime quisquam soluta sunt ut voluptatibus.
-	// 	</div>,
-	// 	<div>
-	// 		33Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, amet blanditiis ea fugiat
-	// 		laborum maxime quisquam soluta sunt ut voluptatibus.
-	// 	</div>,
-	// 	<div>
-	// 		44Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, amet blanditiis ea fugiat
-	// 		laborum maxime quisquam soluta sunt ut voluptatibus.
-	// 	</div>,
-	// ]
-
-	const addOutline1 = (e: any) => {
-		// if (e.target.parentNode.classList.contains('items') || e.target.classList.contains('items')) {
-		// 	e.target.style.background = e.target.style.background === 'red' ? 'transparent' : 'red'
-		// }
-
-		const blockId = e.target.closest('.items').id
-		console.log(blockId)
-		if (onChangeActiveBlock && blockId) {
-			console.log(model)
-			const newActiveBlock = model.get(blockId)
-			if (newActiveBlock) {
-				console.log('newActiveBlock', newActiveBlock)
-				onChangeActiveBlock(newActiveBlock)
+	const handleClick = useCallback(
+		(e: any) => {
+			const blockId = e.target.closest('.items').id
+			if (onChangeActiveBlock && blockId) {
+				const newActiveBlock = model.get(blockId)
+				if (newActiveBlock) {
+					onChangeActiveBlock(newActiveBlock)
+				}
 			}
-		}
-	}
+		},
+		[model, onChangeActiveBlock],
+	)
 
 	const accept = useMemo(
 		() => [
-			viewOn('click', addOutline1),
+			viewOn('click', handleClick),
 			viewOn('dragstart', (evt: any) => (evt.target as Element).classList.add('box')),
 			viewOn('dragend', (evt: any) => (evt.target as Element).classList.remove('box')),
-			// inView({
-			//   enter: changeBgColor(),
-			//   leave: changeBgColor('#ebebeb'),
-			//   stream: async (asyncIterable: any) => {
-			//     for await (const [eventName] of asyncIterable) {
-			//       console.log('inView stream event:', eventName);
-			//     }
-			//   },
-			// }),
 		],
-		[addOutline1],
+		[handleClick],
 	)
 
 	return (
 		<div className="mobile-container">
-			<div id="container" className="container-mobile-radius" style={{ color, backgroundColor }}>
+			<div id="container" style={{ color, backgroundColor }}>
 				{[...model.values()].map((block) => (
 					<DraggableElement
 						key={block.id}

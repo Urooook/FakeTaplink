@@ -55,7 +55,7 @@ export const TextEditor = () => {
 	return (
 		<>
 			<Textarea
-				value={activeBlock?.value.text}
+				value={(activeBlock as ComponentBlock<TextBlockProps>)?.value.text}
 				onChange={(e) => handleInputChange(e, 'text')}
 				className={styles.textarea}
 				placeholder={'Some text...'}

@@ -1,6 +1,7 @@
 import { createContext } from 'react'
 
 export type Theme = {
+	id?: string
 	color: string
 	backgroundColor: string
 }

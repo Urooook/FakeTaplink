@@ -3,15 +3,11 @@
     min-height: 80px;
     z-index: 1;
     touch-action: none;
-    /*border: 1px solid white;*/
     margin-bottom: 8px;
     padding: 5px;
     border-radius: 12px;
-    /*position: absolute;*/
     color: white;
-    /*transition: all 2s ease-in-out;*/
-    /*background-color: red;*/
-    /*position: absolute;*/
+    transition: background-color 0.2s ease-in-out;
 }
 
 .activeItem {
@@ -19,7 +15,6 @@
 }
 
 .box {
-    /*border-color: red;*/
     background: var(--ft-color-grey);
     opacity: 40%;
     position: absolute;
