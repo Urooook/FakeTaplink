@@ -3,6 +3,7 @@ import { TextBlock } from '../Pages/MainPage/components/blocks/TextBlock/TextBlo
 import { LinkBlock } from '../Pages/MainPage/components/blocks/LinkBlock/LinkBlock'
 import {HtmlBlock} from "../Pages/MainPage/components/blocks/HtmlBlock/HtmlBlock";
 import {ImageBlock} from "../Pages/MainPage/components/blocks/ImageBlock/ImageBlock";
+import {CarouselBlock} from "../Pages/MainPage/components/blocks/CarouselBlock/CarouselBlock";
 
 export const getComponentFromComponentNames = (block: Block): Block => {
 	if (!block.componentName) {
@@ -18,4 +19,5 @@ const components = {
 	[CompoentNames.LinkBlock]: LinkBlock,
 	[CompoentNames.HtmlLink]: HtmlBlock,
 	[CompoentNames.ImageLink]: ImageBlock,
+	[CompoentNames.CarouselLink]: CarouselBlock,
 }
