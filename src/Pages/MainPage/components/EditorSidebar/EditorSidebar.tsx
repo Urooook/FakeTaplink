@@ -19,7 +19,7 @@ export const EditorSidebar = ({ currentEditor }: EditorSidebarProps) => {
 				return <TextEditor />
 			case ControlIds.link:
 				return <LinkEditor />
-			case 'html':
+			case ControlIds.html:
 				return <HtmlEditor />
 			default:
 				return <></>
