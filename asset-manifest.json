@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/FakeTaplink/static/css/main.10d7dfdf.css",
+    "main.js": "/FakeTaplink/static/js/main.5a61d6b5.js",
+    "index.html": "/FakeTaplink/index.html",
+    "main.10d7dfdf.css.map": "/FakeTaplink/static/css/main.10d7dfdf.css.map",
+    "main.5a61d6b5.js.map": "/FakeTaplink/static/js/main.5a61d6b5.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.10d7dfdf.css",
+    "static/js/main.5a61d6b5.js"
+  ]
+}
