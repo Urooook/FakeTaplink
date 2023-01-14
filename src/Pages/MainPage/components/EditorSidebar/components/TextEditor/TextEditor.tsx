@@ -11,7 +11,7 @@ import {
 import { TextBlock } from '../../../blocks/TextBlock/TextBlock'
 
 const initialTextEditorState: TextBlockProps = {
-	text: '',
+	text: 'Ты добавил новый блок. Можешь изменить его в блоке справа',
 }
 export const TextEditor = () => {
 	const { blocks, activeBlock, onAddBlock, onDeleteBlock } = useContext(BlocksContext)
@@ -21,11 +21,11 @@ export const TextEditor = () => {
 		if (!activeBlock && onAddBlock) {
 			onAddBlock({
 				value: { ...initialTextEditorState },
-				component: <TextBlock text={''} />,
+				component: <TextBlock text={initialTextEditorState.text} />,
 				componentName: CompoentNames.TextBlock,
 			})
 		}
-	}, [activeBlock])
+	}, [activeBlock, onAddBlock])
 
 	if (!onAddBlock || !onDeleteBlock) {
 		return null

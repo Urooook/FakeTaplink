@@ -3,7 +3,7 @@
     min-height: 80px;
     z-index: 1;
     touch-action: none;
-    border: 1px solid white;
+    /*border: 1px solid white;*/
     margin-bottom: 8px;
     padding: 5px;
     border-radius: 12px;

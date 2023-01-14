@@ -18,7 +18,7 @@ const DraggableCanvas = () => {
 		return nextElement
 	}
 
-	const { blocks: model } = useContext(BlocksContext)
+	const { blocks: model, onChangeActiveBlock } = useContext(BlocksContext)
 	const {
 		theme: { color, backgroundColor },
 	} = useContext(ThemeContext)
@@ -85,8 +85,19 @@ const DraggableCanvas = () => {
 	// ]
 
 	const addOutline1 = (e: any) => {
-		if (e.target.parentNode.classList.contains('items') || e.target.classList.contains('items')) {
-			e.target.style.background = e.target.style.background === 'red' ? 'transparent' : 'red'
+		// if (e.target.parentNode.classList.contains('items') || e.target.classList.contains('items')) {
+		// 	e.target.style.background = e.target.style.background === 'red' ? 'transparent' : 'red'
+		// }
+
+		const blockId = e.target.closest('.items').id
+		console.log(blockId)
+		if (onChangeActiveBlock && blockId) {
+			console.log(model)
+			const newActiveBlock = model.get(blockId)
+			if (newActiveBlock) {
+				console.log('newActiveBlock', newActiveBlock)
+				onChangeActiveBlock(newActiveBlock)
+			}
 		}
 	}
 
@@ -94,7 +105,11 @@ const DraggableCanvas = () => {
 		() => [
 			viewOn('click', addOutline1),
 			viewOn('dragstart', (evt: any) => (evt.target as Element).classList.add('box')),
-			viewOn('dragend', (evt: any) => (evt.target as Element).classList.remove('box')),
+			viewOn('dragend', (evt: any) => {
+				;(evt.target as Element).classList.remove('box')
+				console.log('12312312312')
+				console.log(model)
+			}),
 			// inView({
 			//   enter: changeBgColor(),
 			//   leave: changeBgColor('#ebebeb'),
@@ -105,17 +120,19 @@ const DraggableCanvas = () => {
 			//   },
 			// }),
 		],
-		[],
+		[model, addOutline1],
 	)
 
 	return (
 		<div className="mobile-container">
 			<div id="container" className="container-mobile-radius" style={{ color, backgroundColor }}>
-				{/*{[model.values()].map((el) => (*/}
-				{/*	<DraggableElement key={Math.random()} accept={accept} elem={el} />*/}
-				{/*))}*/}
 				{[...model.values()].map((block) => (
-					<DraggableElement key={block.id} accept={accept} elem={block.component} />
+					<DraggableElement
+						key={block.id}
+						accept={accept}
+						elem={block.component}
+						elemId={block.id}
+					/>
 				))}
 			</div>
 		</div>

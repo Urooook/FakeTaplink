@@ -1,0 +1,12 @@
+.container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.icon {
+    height: 30px;
+    width: 30px;
+    margin-right: 5px;
+    color: var(--ft-color-blue);
+    align-self: center;
+}
