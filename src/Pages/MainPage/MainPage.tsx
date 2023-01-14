@@ -13,6 +13,8 @@ import {
 	setBlocksMapToLocalStorage,
 } from '../../helpers/localStorage/localStorage'
 import { StorageUnits } from '../../helpers/localStorage/storageUnits'
+import { Mode, ModeContext } from './modeContext'
+import { ChangeModeButton } from './components/ChangeModeButton/ChangeModeButton'
 
 const DEFAULT_CONTROL = ControlIds.themes
 
@@ -26,6 +28,7 @@ export const MainPage = () => {
 	const [blocks, setBlocks] = useState<Map<BlockId, Block>>(new Map<BlockId, Block>())
 	const [activeBlock, setActiveBlock] = useState<Block | null>()
 	const [theme, setTheme] = useState<Theme>()
+	const [mode, setMode] = useState<Mode>(Mode.edit)
 
 	useEffect(() => {
 		if (theme) {
@@ -76,31 +79,46 @@ export const MainPage = () => {
 		[blocks],
 	)
 
+	const handleChangeActiveBlock = useCallback((newActiveBlock: Block | null) => {
+		setActiveBlock(newActiveBlock)
+		if (newActiveBlock?.componentName) {
+			setActiveControlId(newActiveBlock.componentName)
+		}
+	}, [])
+
 	const handleControlClick = (controlId: string) => {
 		setActiveControlId(controlId)
 	}
 
 	return (
-		<ThemeContext.Provider value={{ theme: theme || DEFAULT_THEME, onThemeChange: setTheme }}>
-			<BlocksContext.Provider
-				value={{
-					blocks,
-					activeBlock,
-					onAddBlock: handleAddBlock,
-					onDeleteBlock: handleDeleteBlock,
-					onChangeActiveBlock: setActiveBlock,
-				}}
-			>
-				<div className={styles.container}>
-					<ControlsSidebar activeControlId={activeControlId} onControlClick={handleControlClick} />
-					<div className={styles.mainSection}>
-						<div className={styles.mobileSecition}>
-							<DraggableCanvas />
+		<ModeContext.Provider value={{ mode, onModeChange: setMode }}>
+			<ThemeContext.Provider value={{ theme: theme || DEFAULT_THEME, onThemeChange: setTheme }}>
+				<BlocksContext.Provider
+					value={{
+						blocks,
+						activeBlock,
+						onAddBlock: handleAddBlock,
+						onDeleteBlock: handleDeleteBlock,
+						onChangeActiveBlock: handleChangeActiveBlock,
+					}}
+				>
+					<div className={styles.container}>
+						<ControlsSidebar
+							activeControlId={activeControlId}
+							onControlClick={handleControlClick}
+						/>
+						<div className={styles.mainSection}>
+							<div className={styles.mobileSecition}>
+								<div>
+									<ChangeModeButton />
+								</div>
+								<DraggableCanvas />
+							</div>
 						</div>
+						<EditorSidebar currentEditor={activeControlId} />
 					</div>
-					<EditorSidebar currentEditor={activeControlId} />
-				</div>
-			</BlocksContext.Provider>
-		</ThemeContext.Provider>
+				</BlocksContext.Provider>
+			</ThemeContext.Provider>
+		</ModeContext.Provider>
 	)
 }

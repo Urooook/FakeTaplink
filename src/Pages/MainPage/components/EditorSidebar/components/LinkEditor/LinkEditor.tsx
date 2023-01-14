@@ -20,13 +20,14 @@ export const LinkEditor = () => {
 
 	useEffect(() => {
 		if (!activeBlock && onAddBlock) {
+			console.log('activeBlock', activeBlock)
 			onAddBlock({
 				value: { ...initialLinkEditorState },
 				component: <LinkBlock {...initialLinkEditorState} />,
 				componentName: CompoentNames.LinkBlock,
 			})
 		}
-	}, [activeBlock])
+	}, [activeBlock, onAddBlock])
 
 	if (!onAddBlock || !onDeleteBlock) {
 		return null

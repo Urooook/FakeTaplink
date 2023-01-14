@@ -3,6 +3,13 @@
     flex-direction: column;
 }
 
+.buttonView {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--ft-border-radius);
+}
+
 .button {
     height: 70px;
 }

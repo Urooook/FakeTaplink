@@ -18,7 +18,7 @@ const DraggableCanvas = () => {
 		return nextElement
 	}
 
-	const { blocks: model } = useContext(BlocksContext)
+	const { blocks: model, onChangeActiveBlock } = useContext(BlocksContext)
 	const {
 		theme: { color, backgroundColor },
 	} = useContext(ThemeContext)
@@ -85,11 +85,20 @@ const DraggableCanvas = () => {
 	// ]
 
 	const addOutline1 = (e: any) => {
-		if (e.target.parentNode.classList.contains('items') || e.target.classList.contains('items')) {
-			e.target.style.background = e.target.style.background === 'red' ? 'transparent' : 'red'
-		}
-		console.log(e.target)
+		// if (e.target.parentNode.classList.contains('items') || e.target.classList.contains('items')) {
+		// 	e.target.style.background = e.target.style.background === 'red' ? 'transparent' : 'red'
+		// }
 
+		const blockId = e.target.closest('.items').id
+		console.log(blockId)
+		if (onChangeActiveBlock && blockId) {
+			console.log(model)
+			const newActiveBlock = model.get(blockId)
+			if (newActiveBlock) {
+				console.log('newActiveBlock', newActiveBlock)
+				onChangeActiveBlock(newActiveBlock)
+			}
+		}
 	}
 
 	const accept = useMemo(
@@ -107,17 +116,19 @@ const DraggableCanvas = () => {
 			//   },
 			// }),
 		],
-		[],
+		[addOutline1],
 	)
 
 	return (
 		<div className="mobile-container">
 			<div id="container" className="container-mobile-radius" style={{ color, backgroundColor }}>
-				{/*{[model.values()].map((el) => (*/}
-				{/*	<DraggableElement key={Math.random()} accept={accept} elem={el} />*/}
-				{/*))}*/}
 				{[...model.values()].map((block) => (
-					<DraggableElement key={block.id} accept={accept} elem={block.component} boss={1} />
+					<DraggableElement
+						key={block.id}
+						accept={accept}
+						elem={block.component}
+						elemId={block.id}
+					/>
 				))}
 			</div>
 		</div>
