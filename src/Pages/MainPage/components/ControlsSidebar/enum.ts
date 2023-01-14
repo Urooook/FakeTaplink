@@ -1,10 +1,10 @@
 import { CompoentNames } from '../../blocksContext'
 
 export const ControlIds = {
-	themes: 'themes',
+	themes: 'Тема',
 	text: CompoentNames.TextBlock,
-	html: CompoentNames.HtmlLink,
+	html: CompoentNames.HtmlBlock,
 	link: CompoentNames.LinkBlock,
-	image: CompoentNames.ImageLink,
-	social: 'social',
+	image: CompoentNames.ImageBlock,
+	social: 'Соцсети',
 }

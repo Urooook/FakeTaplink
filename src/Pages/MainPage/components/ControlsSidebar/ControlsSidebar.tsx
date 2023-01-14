@@ -1,8 +1,11 @@
 import styles from './ControlsSidebar.module.css'
 import stylesControlButton from './components/ControlButton/ControlButton.module.css'
 import { ControlButton } from './components/ControlButton/ControlButton'
-import { BiFont, BiPaint, BiCodeAlt, BiImageAdd, BiLinkAlt, BiNetworkChart } from 'react-icons/bi'
+import { BiCodeAlt, BiFont, BiImageAdd, BiLinkAlt, BiNetworkChart, BiPaint } from 'react-icons/bi'
 import { ControlIds } from './enum'
+import cn from 'classnames'
+import { useContext } from 'react'
+import { Mode, ModeContext } from '../../modeContext'
 
 const controls = [
 	{ title: 'Тема', id: ControlIds.themes, icon: <BiPaint className={stylesControlButton.icon} /> },
@@ -35,8 +38,10 @@ type ControlSidebarProps = {
 }
 
 export const ControlsSidebar = ({ onControlClick, activeControlId }: ControlSidebarProps) => {
+	const { mode } = useContext(ModeContext)
+
 	return (
-		<div className={styles.container}>
+		<div className={cn(styles.container, { [styles.hidden]: mode === Mode.view })}>
 			{controls.map((control) => {
 				return (
 					<ControlButton
