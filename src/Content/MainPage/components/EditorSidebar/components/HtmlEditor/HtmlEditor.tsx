@@ -1,12 +1,10 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Textarea} from "../../../../../../components/UI/Textarea/Textarea";
 import styles from "./HtmlEditor.module.css";
 import {Button} from "../../../../../../components/UI/Button/Button";
 import {opt, or, repeat, seq, tag, take, ws} from "../../../../../../helpers/Parser/Factories";
 import {binsearchKey} from "../../../../../../helpers/Parser/htmlTags";
 import {Parser} from "../../../../../../helpers/Parser/types";
-import parse from "html-react-parser";
-import Editor from "react-simple-code-editor";
 
 type parserResult = {
     res: string,
@@ -16,7 +14,7 @@ type parserResult = {
 export const HtmlEditor = () => {
     const [errors, setErrors] = useState<string[]>([])
     const [html, setHtml] = useState<string>('')
-    const [compile, setCompile] = useState(false)
+    const [compile, setCompile] = useState('')
 
     const xmlNameRgxp = /[^ <>"'=/]/;
 
@@ -74,30 +72,8 @@ export const HtmlEditor = () => {
         {min: 0}
     )
 
-    const htmlP = xml('<div>23');
-    // htmlP.next()
-    // console.log(htmlP.next('</div>'))
-    // // @ts-ignore
-    // console.log([...htmlP])
-    const ll = tag(['<',/[a-z]/,/[a-z]/,/[a-z]/,'>'])
-
-    const xmlTag1 = xmlTag('<di');
-    xmlTag1.next()
-    console.log(xmlTag1.next('v>'))
-
-
-
-    const write = (str: any) => {
-        console.log(str)
-        htmlP.next()
-        htmlP.next(str)
-        // @ts-ignore
-        console.log([...ggwp])
-    }
-
-
-    const parseHtml = (html: string) => {
-        const tokens  = xml(html.replace(/(\s)\1+/gm, '').replace(/\n/gm, ''));
+    const parseHtml = (htmlArr: any) => {
+        const tokens = htmlArr
         const stackStartTags = [];
         const stackEndTags = [];
         const errorMessages = [];
@@ -152,19 +128,21 @@ export const HtmlEditor = () => {
             }
         }
 
-        // while ()
-        setCompile(true)
-        // console.log(stackStartTags)
-        // console.log(stackEndTags)
         return {res, errors: errorMessages};
     }
 
-    const parseHtmlObject = () => {
+    const minify = (str: string): string => str.replace(/(\s)\1+/gm, '').replace(/\n/gm, '');
+
+    const write = (str: string) => {
+        const p = xml('a s')
+        p.next()
+        p.next(minify(`${str}`))
+
         // @ts-ignore
-        return new Promise((resolve) => resolve(parseHtml(html))).then((el: parserResult) => {
-            setHtml(el.res)
-            setErrors(el.errors)
-        })
+        const arr = [...p]
+        const result = parseHtml(arr);
+        setCompile(result.res);
+        setErrors(result.errors)
     }
 
     return (
@@ -173,31 +151,22 @@ export const HtmlEditor = () => {
                 errors.length > 0 && errors.map((err) => <div style={{color: 'red'}}>{err}</div>)
             }
 
-            <Editor
+            <Textarea
                 value={html}
-                onValueChange={code => write(code)}
-                className={styles.htmlCode}
-                placeholder={'Some text...'}
-                highlight={hl => compile ? <pre>
-                        <code><div dangerouslySetInnerHTML={{ __html: hl }} /></code>
-                </pre> : <pre><code>{hl}</code></pre>}
-                style={{
-                    color: 'black'
+                onChange={(e) => {
+                    setHtml(e.target.value);
+                    write(e.target.value);
                 }}
+                className={styles.htmlCode}
             />
 
-
             <pre>
-                {/*<code>*/}
-                   {/*<textarea>*/}
-
-                   {/*</textarea>*/}
-                {/*</code>*/}
+                <code>
+                     <div dangerouslySetInnerHTML={{ __html: compile }} />
+                </code>
             </pre>
 
-            <Button onClick={parseHtmlObject}>Remove</Button>
-
-
+            <Button>Добавить</Button>
         </>
     )
 };

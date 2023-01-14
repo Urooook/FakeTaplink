@@ -22,6 +22,8 @@ function testChar(
     switch (typeof test) {
         case 'string':
             if (test !== char) {
+                // console.log('test', test)
+                // console.log('char', char)
                 throw new ParserError('Invalid string', prev);
             }
 
@@ -93,10 +95,10 @@ export function tag(pattern: Iterable<Test>, opts: ParserOptions<string> = {}): 
 export function take(
     test: Test,
     opts: TakeOptions = {}
-): Parser<string, string> {
+): Parser {
     return function* (source, prev) {
         const
-            {min = 0, max = Infinity} = opts;
+            {min = 1, max = Infinity} = opts;
 
         const
             buffer: string[] = [];
@@ -106,24 +108,20 @@ export function take(
             count = 0;
 
         let
-            value = '';
+            value = '',
+            data;
 
         while (true) {
             if (count >= max) {
                 break;
             }
 
-            let
-                chunk = iter.next(),
+            // @ts-ignore
+            let chunk = iter.next(data),
                 char = chunk.value;
-
             if (chunk.done) {
-                if (count >= min) {
-                    break;
-                }
-
-                const
-                    data = yield ParserState.EXPECT_NEW_INPUT;
+                    // @ts-ignore
+                data = yield ParserState.EXPECT_NEW_INPUT;
 
                 if (data == null) {
                     throw new ParserError('Invalid input', prev);
@@ -131,7 +129,8 @@ export function take(
 
                 source = data;
                 iter = intoIter(source);
-                chunk = iter.next();
+                // @ts-ignore
+                chunk = iter.next(data);
                 char = chunk.value;
             }
 
@@ -167,6 +166,7 @@ export function take(
         return [token, buffer.length > 0 ? iterSeq(buffer, iter) : iter];
     };
 }
+
 
 export function seq<T = unknown ,R = unknown>(
     ...parsers: Parser[]
@@ -206,7 +206,8 @@ export function seq(
             while (true) {
                 const
                     chunk = parsing.next(data);
-                console.log(chunk)
+                // console.log('Chunk', chunk)
+                // @ts-ignore
                 if (chunk.done) {
                     prev = chunk.value[0];
                     value.push(prev);
@@ -216,9 +217,9 @@ export function seq(
 
                 } else {
                     if (chunk.value === ParserState.EXPECT_NEW_INPUT) {
-                        console.log( yield chunk.value)
+                        // console.log( yield chunk.value)
                         data = yield chunk.value;
-                        console.log('DATA', data)
+                        // console.log('DATA', data)
                     } else {
                         yield chunk.value;
                     }
