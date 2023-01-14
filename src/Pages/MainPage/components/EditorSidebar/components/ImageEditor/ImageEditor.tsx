@@ -70,15 +70,13 @@ export const ImageEditor = () => {
 	const handleDeleteBlock = () => {
 		onDeleteBlock(activeBlock?.id)
 	}
-
+	console.log(activeBlock)
 	return (
 		<div>
 			{/*<h1>Upload and Display Image usign React Hook's</h1>*/}
-			{selectedImage && (
+			{(selectedImage || activeBlock) && (
 				<div>
-					<img alt="not fount" width={'250px'} src={selectedImage} />
-					<br />
-					<button onClick={() => setSelectedImage('')}>Remove</button>
+					<img alt="not fount" width={'250px'} src={selectedImage || (activeBlock as ComponentBlock<ImageBlockProps>)?.value.image} />
 				</div>
 			)}
 			<br />

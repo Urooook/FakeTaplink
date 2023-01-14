@@ -1,7 +1,7 @@
 import styles from './ControlsSidebar.module.css'
 import stylesControlButton from './components/ControlButton/ControlButton.module.css'
 import { ControlButton } from './components/ControlButton/ControlButton'
-import { BiCodeAlt, BiFont, BiImageAdd, BiLinkAlt, BiNetworkChart, BiPaint } from 'react-icons/bi'
+import { BiCodeAlt, BiFont, BiImageAdd, BiLinkAlt, BiNetworkChart, BiPaint, BiCarousel } from 'react-icons/bi'
 import { ControlIds } from './enum'
 import cn from 'classnames'
 import { useContext } from 'react'
@@ -29,6 +29,11 @@ const controls = [
 		title: 'Соцсети',
 		id: ControlIds.social,
 		icon: <BiNetworkChart className={stylesControlButton.icon} />,
+	},
+	{
+		title: 'Карусель',
+		id: ControlIds.carousel,
+		icon: <BiCarousel className={stylesControlButton.icon} />,
 	},
 ]
 

@@ -6,6 +6,7 @@ import { LinkEditor } from './components/LinkEditor/LinkEditor'
 import { ControlIds } from '../ControlsSidebar/enum'
 import { HtmlEditor } from './components/HtmlEditor/HtmlEditor'
 import { ImageEditor } from './components/ImageEditor/ImageEditor'
+import {CarouselEditor} from "./components/CarouselEditor/CarouselEditor";
 import { Mode, ModeContext } from '../../modeContext'
 import cn from 'classnames'
 
@@ -26,6 +27,8 @@ export const EditorSidebar = ({ currentEditor }: EditorSidebarProps) => {
 				return <HtmlEditor />
 			case ControlIds.image:
 				return <ImageEditor />
+			case ControlIds.carousel:
+				return <CarouselEditor />
 			default:
 				return <></>
 		}

@@ -51,7 +51,6 @@ export const MainPage = () => {
 
 	const handleAddBlock = useCallback(
 		(newBlock: Block) => {
-			console.log(newBlock)
 			if (!newBlock.id) {
 				// TODO подумать над хэш функцйией
 				const newId = String(Math.round(Math.random() * 90000000000))

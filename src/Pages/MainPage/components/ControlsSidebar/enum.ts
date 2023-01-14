@@ -7,4 +7,5 @@ export const ControlIds = {
 	link: CompoentNames.LinkBlock,
 	image: CompoentNames.ImageBlock,
 	social: 'Соцсети',
+	carousel: CompoentNames.CarouselLink,
 }
