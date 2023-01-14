@@ -20,7 +20,6 @@ export const LinkEditor = () => {
 
 	useEffect(() => {
 		if (!activeBlock && onAddBlock) {
-			console.log('activeBlock', activeBlock)
 			onAddBlock({
 				value: { ...initialLinkEditorState },
 				component: <LinkBlock {...initialLinkEditorState} />,
@@ -57,7 +56,7 @@ export const LinkEditor = () => {
 	return (
 		<>
 			<Input
-				value={activeBlock?.value.text}
+				value={(activeBlock as ComponentBlock<LinkBlockProps>)?.value.text}
 				placeholder={'Текст...'}
 				className={styles.inputText}
 				onChange={(e) => handleInputChange(e, 'text')}

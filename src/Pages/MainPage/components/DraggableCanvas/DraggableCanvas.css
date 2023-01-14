@@ -6,14 +6,12 @@
     box-shadow: 43px 0 18px -8px rgb(168 168 168 / 0.25);
 }
 
-.container-mobile-radius {
-    border-radius: 35px;
-}
-
 #container {
     flex: 1;
     position: relative;
     background: var(--ft-color-darker-blue);
     padding: 15px;
     transition: background-color 0.2s, color 0.2s;
+    border-radius: 35px;
+    min-height: 700px;
 }

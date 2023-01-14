@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { withVisitor } from '../../../../../helpers/visitor'
 import './DraggableElement.css'
 import { BlockId, BlocksContext } from '../../../blocksContext'
+import { Mode, ModeContext } from '../../../modeContext'
 
 interface DraggableElementProps {
 	ctx: any
@@ -11,6 +12,11 @@ interface DraggableElementProps {
 
 const DraggableElementShell = ({ ctx, elem, elemId }: DraggableElementProps) => {
 	const { activeBlock } = useContext(BlocksContext)
+	const { mode } = useContext(ModeContext)
+
+	if (mode === Mode.view) {
+		return <div className="items">{elem}</div>
+	}
 
 	return (
 		<div

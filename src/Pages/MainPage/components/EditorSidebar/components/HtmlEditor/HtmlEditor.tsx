@@ -5,12 +5,11 @@ import { Button } from '../../../../../../components/UI/Button/Button'
 import { opt, or, repeat, seq, tag, take, ws } from '../../../../../../helpers/Parser/Factories'
 import { binsearchKey } from '../../../../../../helpers/Parser/htmlTags'
 import { Parser } from '../../../../../../helpers/Parser/types'
-import { TextBlock } from '../../../blocks/TextBlock/TextBlock'
 import {
 	BlocksContext,
 	CompoentNames,
 	ComponentBlock,
-	TextBlockProps,
+	HtmlBlockProps,
 } from '../../../../blocksContext'
 import { HtmlBlock } from '../../../blocks/HtmlBlock/HtmlBlock'
 
@@ -19,13 +18,13 @@ type ParserResult = {
 	errors: string[]
 }
 
-const initialTextEditorState: TextBlockProps = {
-	text: '',
+const initialTextEditorState: HtmlBlockProps = {
+	html: '<div>Some text</div>',
 }
 
 export const HtmlEditor = () => {
 	const [errors, setErrors] = useState<string[]>([])
-	const [html, setHtml] = useState<string>('')
+	const [, setHtml] = useState<string>('')
 	const [compile, setCompile] = useState('')
 	const { blocks, activeBlock, onAddBlock, onDeleteBlock } = useContext(BlocksContext)
 
@@ -33,8 +32,8 @@ export const HtmlEditor = () => {
 		if (!activeBlock && onAddBlock) {
 			onAddBlock({
 				value: { ...initialTextEditorState },
-				component: <TextBlock text={''} />,
-				componentName: CompoentNames.HtmlLink,
+				component: <HtmlBlock {...initialTextEditorState} />,
+				componentName: CompoentNames.HtmlBlock,
 			})
 		}
 	}, [activeBlock])
@@ -155,13 +154,13 @@ export const HtmlEditor = () => {
 		setErrors(result.errors)
 
 		if (activeBlock?.id) {
-			const currentBlock = blocks.get(activeBlock?.id) as ComponentBlock<TextBlockProps>
+			const currentBlock = blocks.get(activeBlock?.id) as ComponentBlock<HtmlBlockProps>
 
 			if (currentBlock) {
-				currentBlock.value['text'] = str
+				currentBlock.value['html'] = str
 				onAddBlock({
 					...currentBlock,
-					component: <HtmlBlock text={currentBlock.value.text} />,
+					component: <HtmlBlock html={currentBlock.value.html} />,
 				})
 			}
 		}
@@ -176,7 +175,7 @@ export const HtmlEditor = () => {
 			{errors.length > 0 && errors.map((err) => <div style={{ color: 'red' }}>{err}</div>)}
 
 			<Textarea
-				value={html}
+				value={(activeBlock as ComponentBlock<HtmlBlockProps>)?.value.html}
 				onChange={(e) => {
 					setHtml(e.target.value)
 					write(e.target.value)

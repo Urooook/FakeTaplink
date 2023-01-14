@@ -1,8 +1,8 @@
 import { Block, CompoentNames } from '../Pages/MainPage/blocksContext'
 import { TextBlock } from '../Pages/MainPage/components/blocks/TextBlock/TextBlock'
 import { LinkBlock } from '../Pages/MainPage/components/blocks/LinkBlock/LinkBlock'
-import {HtmlBlock} from "../Pages/MainPage/components/blocks/HtmlBlock/HtmlBlock";
-import {ImageBlock} from "../Pages/MainPage/components/blocks/ImageBlock/ImageBlock";
+import { HtmlBlock } from '../Pages/MainPage/components/blocks/HtmlBlock/HtmlBlock'
+import { ImageBlock } from '../Pages/MainPage/components/blocks/ImageBlock/ImageBlock'
 import {CarouselBlock} from "../Pages/MainPage/components/blocks/CarouselBlock/CarouselBlock";
 
 export const getComponentFromComponentNames = (block: Block): Block => {
@@ -17,7 +17,7 @@ export const getComponentFromComponentNames = (block: Block): Block => {
 const components = {
 	[CompoentNames.TextBlock]: TextBlock,
 	[CompoentNames.LinkBlock]: LinkBlock,
-	[CompoentNames.HtmlLink]: HtmlBlock,
-	[CompoentNames.ImageLink]: ImageBlock,
+	[CompoentNames.HtmlBlock]: HtmlBlock,
+	[CompoentNames.ImageBlock]: ImageBlock,
 	[CompoentNames.CarouselLink]: CarouselBlock,
 }

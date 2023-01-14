@@ -10,5 +10,10 @@
     padding: 10px;
 
     box-shadow: var(--ft-box-shadow-right), var(--ft-box-shadow-right);
+    transition: transform 0.5s;
+}
+
+.hidden {
+    transform: translateX(-340px);
 }
 

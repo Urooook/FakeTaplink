@@ -1,12 +1,14 @@
 import styles from './EditorSidebar.module.css'
 import { TextEditor } from './components/TextEditor/TextEditor'
 import { ThemeEditor } from './components/ThemeEditor/ThemeEditor'
-import { useMemo } from 'react'
+import { useContext, useMemo } from 'react'
 import { LinkEditor } from './components/LinkEditor/LinkEditor'
 import { ControlIds } from '../ControlsSidebar/enum'
 import { HtmlEditor } from './components/HtmlEditor/HtmlEditor'
-import {ImageEditor} from "./components/ImageEditor/ImageEditor";
+import { ImageEditor } from './components/ImageEditor/ImageEditor'
 import {CarouselEditor} from "./components/CarouselEditor/CarouselEditor";
+import { Mode, ModeContext } from '../../modeContext'
+import cn from 'classnames'
 
 type EditorSidebarProps = {
 	currentEditor: string
@@ -32,9 +34,11 @@ export const EditorSidebar = ({ currentEditor }: EditorSidebarProps) => {
 		}
 	}, [currentEditor])
 
+	const { mode } = useContext(ModeContext)
+
 	return (
-		<div className={styles.container}>
-			<div className={styles.title}>Edit {currentEditor}</div>
+		<div className={cn(styles.container, { [styles.hidden]: mode === Mode.view })}>
+			<div className={styles.title}>{currentEditor}</div>
 			{renderCurrentEditor}
 		</div>
 	)

@@ -23,7 +23,7 @@ export const ImageEditor = () => {
 			onAddBlock({
 				value: { ...initialTextEditorState },
 				component: <ImageBlock image={selectedImage} />,
-				componentName: CompoentNames.ImageLink,
+				componentName: CompoentNames.ImageBlock,
 			})
 		}
 	}, [activeBlock])

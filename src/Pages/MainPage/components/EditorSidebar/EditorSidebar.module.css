@@ -9,6 +9,11 @@
     padding: 10px;
 
     box-shadow: var(--ft-box-shadow-left), var(--ft-box-shadow-left);
+    transition: transform 0.5s;
+}
+
+.hidden {
+    transform: translateX(340px);
 }
 
 .title {
