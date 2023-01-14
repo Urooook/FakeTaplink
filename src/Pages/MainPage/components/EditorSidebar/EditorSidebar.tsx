@@ -4,6 +4,7 @@ import { ThemeEditor } from './components/ThemeEditor/ThemeEditor'
 import { useMemo } from 'react'
 import { LinkEditor } from './components/LinkEditor/LinkEditor'
 import { ControlIds } from '../ControlsSidebar/enum'
+import {HtmlEditor} from "./components/HtmlEditor/HtmlEditor";
 
 type EditorSidebarProps = {
 	currentEditor: string
@@ -18,6 +19,8 @@ export const EditorSidebar = ({ currentEditor }: EditorSidebarProps) => {
 				return <TextEditor />
 			case ControlIds.link:
 				return <LinkEditor />
+			case 'html':
+				return <HtmlEditor />
 			default:
 				return <></>
 		}
