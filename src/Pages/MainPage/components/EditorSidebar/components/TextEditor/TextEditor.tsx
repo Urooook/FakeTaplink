@@ -2,7 +2,12 @@ import { Textarea } from '../../../../../../components/UI/Textarea/Textarea'
 import { Button } from '../../../../../../components/UI/Button/Button'
 import styles from './TextEditor.module.css'
 import { useContext, useEffect } from 'react'
-import { BlocksContext, ComponentBlock, TextBlockProps } from '../../../../blocksContext'
+import {
+	BlocksContext,
+	CompoentNames,
+	ComponentBlock,
+	TextBlockProps,
+} from '../../../../blocksContext'
 import { TextBlock } from '../../../blocks/TextBlock/TextBlock'
 
 const initialTextEditorState: TextBlockProps = {
@@ -14,7 +19,11 @@ export const TextEditor = () => {
 	// TODO подмуать над зависимостями
 	useEffect(() => {
 		if (!activeBlock && onAddBlock) {
-			onAddBlock({ value: { ...initialTextEditorState }, component: <TextBlock text={''} /> })
+			onAddBlock({
+				value: { ...initialTextEditorState },
+				component: <TextBlock text={''} />,
+				componentName: CompoentNames.TextBlock,
+			})
 		}
 	}, [activeBlock])
 

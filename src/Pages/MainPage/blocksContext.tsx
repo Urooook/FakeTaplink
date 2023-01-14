@@ -2,7 +2,17 @@ import { createContext, ReactNode } from 'react'
 
 export type Block = ComponentBlock<TextBlockProps | LinkBlockProps>
 
-export type ComponentBlock<T> = { id?: BlockId; component: ReactNode; value: T }
+export enum CompoentNames {
+	TextBlock = 'TextBlock',
+	LinkBlock = 'LinkBlock',
+}
+
+export type ComponentBlock<T> = {
+	value: T
+	component: ReactNode
+	componentName?: CompoentNames
+	id?: BlockId
+}
 
 export type TextBlockProps = {
 	text: string

@@ -1,6 +1,5 @@
 import type { KVStorageEngine } from "./interface";
 
-// TODO add interface
 export default class SessionStorageEngine {
 	get(key: string): ReturnType<KVStorageEngine['get']> {
 		return sessionStorage.getItem(key)
