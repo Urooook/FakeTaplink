@@ -1,20 +1,38 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Textarea} from "../../../../../../components/UI/Textarea/Textarea";
 import styles from "./HtmlEditor.module.css";
 import {Button} from "../../../../../../components/UI/Button/Button";
 import {opt, or, repeat, seq, tag, take, ws} from "../../../../../../helpers/Parser/Factories";
 import {binsearchKey} from "../../../../../../helpers/Parser/htmlTags";
 import {Parser} from "../../../../../../helpers/Parser/types";
+import {TextBlock} from "../../../blocks/TextBlock/TextBlock";
+import {BlocksContext, CompoentNames, ComponentBlock, TextBlockProps} from "../../../../blocksContext";
+import {HtmlBlock} from "../../../blocks/HtmlBlock/HtmlBlock";
 
 type parserResult = {
     res: string,
     errors: string[]
 }
 
+const initialTextEditorState: TextBlockProps = {
+    text: '',
+}
+
 export const HtmlEditor = () => {
-    const [errors, setErrors] = useState<string[]>([])
-    const [html, setHtml] = useState<string>('')
-    const [compile, setCompile] = useState('')
+    const [errors, setErrors] = useState<string[]>([]);
+    const [html, setHtml] = useState<string>('');
+    const [compile, setCompile] = useState('');
+    const { blocks, activeBlock, onAddBlock, onDeleteBlock } = useContext(BlocksContext);
+
+    useEffect(() => {
+        if (!activeBlock && onAddBlock) {
+            onAddBlock({
+                value: { ...initialTextEditorState },
+                component: <TextBlock text={''} />,
+                componentName: CompoentNames.HtmlLink,
+            })
+        }
+    }, [activeBlock])
 
     const xmlNameRgxp = /[^ <>"'=/]/;
 
@@ -133,7 +151,12 @@ export const HtmlEditor = () => {
 
     const minify = (str: string): string => str.replace(/(\s)\1+/gm, '').replace(/\n/gm, '');
 
+    if (!onAddBlock || !onDeleteBlock) {
+        return null
+    }
+
     const write = (str: string) => {
+
         const p = xml('a s')
         p.next()
         p.next(minify(`${str}`))
@@ -143,7 +166,23 @@ export const HtmlEditor = () => {
         const result = parseHtml(arr);
         setCompile(result.res);
         setErrors(result.errors)
+
+        if (activeBlock?.id) {
+            const currentBlock = blocks.get(activeBlock?.id) as ComponentBlock<TextBlockProps>
+
+            if (currentBlock) {
+                currentBlock.value['text'] = str;
+                onAddBlock({
+                    ...currentBlock,
+                    component: <HtmlBlock text={currentBlock.value.text} />,
+                })
+            }
+        }
     }
+
+
+
+
 
     return (
         <>

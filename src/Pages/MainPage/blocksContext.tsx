@@ -5,6 +5,7 @@ export type Block = ComponentBlock<TextBlockProps | LinkBlockProps>
 export enum CompoentNames {
 	TextBlock = 'TextBlock',
 	LinkBlock = 'LinkBlock',
+	HtmlLink = 'HtmlLink'
 }
 
 export type ComponentBlock<T> = {
