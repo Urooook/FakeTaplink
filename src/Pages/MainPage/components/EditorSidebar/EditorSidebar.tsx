@@ -4,7 +4,7 @@ import { ThemeEditor } from './components/ThemeEditor/ThemeEditor'
 import { useMemo } from 'react'
 import { LinkEditor } from './components/LinkEditor/LinkEditor'
 import { ControlIds } from '../ControlsSidebar/enum'
-import {HtmlEditor} from "./components/HtmlEditor/HtmlEditor";
+import { HtmlEditor } from './components/HtmlEditor/HtmlEditor'
 
 type EditorSidebarProps = {
 	currentEditor: string
