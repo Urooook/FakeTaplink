@@ -2,7 +2,12 @@ import { Input } from '../../../../../../components/UI/Input/Input'
 import styles from './LinkEditor.module.css'
 import { Button } from '../../../../../../components/UI/Button/Button'
 import { useContext, useEffect } from 'react'
-import { BlocksContext, ComponentBlock, LinkBlockProps } from '../../../../blocksContext'
+import {
+	BlocksContext,
+	CompoentNames,
+	ComponentBlock,
+	LinkBlockProps,
+} from '../../../../blocksContext'
 import { LinkBlock } from '../../../blocks/LinkBlock/LinkBlock'
 
 const initialLinkEditorState: LinkBlockProps = {
@@ -18,6 +23,7 @@ export const LinkEditor = () => {
 			onAddBlock({
 				value: { ...initialLinkEditorState },
 				component: <LinkBlock {...initialLinkEditorState} />,
+				componentName: CompoentNames.LinkBlock,
 			})
 		}
 	}, [activeBlock])
