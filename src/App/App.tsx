@@ -8,7 +8,7 @@ import Loader from '../components/Loader/Loader'
 const App = (): ReactElement => (
 	<div className={styles.mainSection}>
 		<Suspense fallback={<Loader />}>
-			<BrowserRouter>
+			<BrowserRouter basename={process.env.PUBLIC_URL}>
 				<AppRoutes />
 			</BrowserRouter>
 		</Suspense>
