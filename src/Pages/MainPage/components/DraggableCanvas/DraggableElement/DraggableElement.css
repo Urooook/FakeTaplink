@@ -14,8 +14,12 @@
     /*position: absolute;*/
 }
 
+.activeItem {
+    background-color: rgba(82, 82, 82, 0.3);
+}
+
 .box {
-    border-color: red;
+    /*border-color: red;*/
     background: var(--ft-color-grey);
     opacity: 40%;
     position: absolute;

@@ -116,7 +116,7 @@ const DraggableCanvas = () => {
 			//   },
 			// }),
 		],
-		[model, addOutline1],
+		[addOutline1],
 	)
 
 	return (
@@ -128,7 +128,6 @@ const DraggableCanvas = () => {
 						accept={accept}
 						elem={block.component}
 						elemId={block.id}
-						boss={1}
 					/>
 				))}
 			</div>
