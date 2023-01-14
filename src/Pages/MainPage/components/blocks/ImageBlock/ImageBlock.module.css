@@ -1,0 +1,13 @@
+.image {
+    border-radius: 20px;
+}
+
+.imageWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.avatar {
+    border-radius: 50%;
+}

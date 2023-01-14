@@ -105,11 +105,7 @@ const DraggableCanvas = () => {
 		() => [
 			viewOn('click', addOutline1),
 			viewOn('dragstart', (evt: any) => (evt.target as Element).classList.add('box')),
-			viewOn('dragend', (evt: any) => {
-				;(evt.target as Element).classList.remove('box')
-				console.log('12312312312')
-				console.log(model)
-			}),
+			viewOn('dragend', (evt: any) => (evt.target as Element).classList.remove('box')),
 			// inView({
 			//   enter: changeBgColor(),
 			//   leave: changeBgColor('#ebebeb'),
@@ -132,6 +128,7 @@ const DraggableCanvas = () => {
 						accept={accept}
 						elem={block.component}
 						elemId={block.id}
+						boss={1}
 					/>
 				))}
 			</div>
